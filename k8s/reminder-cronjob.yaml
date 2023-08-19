@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hybrid-reminder
+spec:
+  schedule: "*/5 * * * *" # every 5 minute
+  concurrencyPolicy: "Replace"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            parent: "cron-reminder"
+        spec:
+          containers:
+            - name: hybrid-reminder
+              image: "cfb-beacon:latest"
+              env:
+                - name: SLACK_HOOK_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: slack
+                      key: slack_hook_url
+
+          restartPolicy: Never
+---

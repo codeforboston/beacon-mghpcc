@@ -1,0 +1,34 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: beacon-mghpcc
+spec:
+  source:
+    type: Git
+    git:
+      uri: 'http://github.com/codeforboston/beacon-mghpcc'
+    contextDir: /
+
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Dockerfile
+
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'cfb-beacon:latest'
+
+  resources: {}
+
+  postCommit: {}
+
+  # https://docs.openshift.com/container-platform/4.13/cicd/builds/triggering-builds-build-hooks.html
+  triggers:
+    - type: GitHub
+      github:
+        secretReference:
+          name: beacon-webhook-secret
+    - type: ConfigChange
+
+  # runPolicy: Serial

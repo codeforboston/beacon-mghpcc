@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "lib": ["es2020", "dom"],
+    "downlevelIteration": true,
+    "removeComments": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "sourceMap": true,
+    "target": "es6",
+    "outDir": "build",
+    "resolveJsonModule": true,
+    "strictNullChecks": true,
+    "typeRoots": ["./types"],
+    "types": ["node"],
+    "baseUrl": "./"
+  },
+  "include": ["./**/*.ts"],
+  "exclude": [
+    "node_modules/**/*"
+  ]
+}

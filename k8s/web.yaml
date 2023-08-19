@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: beacon-web
+spec:
+  initContainers:
+    - name: init-beacon-web
+      image: node:18-alpine
+      command: ['npm', 'install']
+  containers:
+    - name: beacon-web
+      image: node:18-alpine
+      ports:
+        - containerPort: 80
+      command: ['node', 'app.js']
